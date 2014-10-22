@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="style.css" type="text/css" rel="stylesheet" />
+  <script>
+  var arr = [200, 300, 400, 500, 600];
+  var num_bar = 0;
+  function setHeight(){
+    var left = parseInt(document.getElementById('bar'+num_bar).style.left);
+    document.getElementById('bar'+num_bar).style.left = left + 5 + 'px';
+    left += 5;
+    if (left < arr[num_bar] + 100){
+      setTimeout(setHeight, 20);
+    } else {
+      num_bar++;
+      if (num_bar < arr.length) {
+        setHeight();
+      }
+    }
+  }
+  </script>
+<head>
+<body>
+
+  <script>   
+    var id = '';
+    var f_top = 500;
+    var height = 0;
+    
+    for (var i = 0; i < arr.length; ++i) {
+      id = 'bar' + i;
+      height = (arr[i]/2);
+      document.write('<div id="'+id+'" class = "bar" style="height:'+height+'px; left:'+(height*2)+'px; top:'+(f_top-height)+'px"></div>');
+    }
+    
+    setTimeout(setHeight, 3000);
+    
+  </script> 
+
+
+</body>
+</html>
