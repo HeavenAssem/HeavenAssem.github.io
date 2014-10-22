@@ -3,13 +3,14 @@
 <head>
   <link href="style.css" type="text/css" rel="stylesheet" />
   <script>
-  var arr = [200, 300, 400, 500, 600];
+  
+  var arr = [600, 300, 500, 400, 200, 700, 100, 800, 900, 1000];
   var num_bar = 0;
   function setHeight(){
     var left = parseInt(document.getElementById('bar'+num_bar).style.left);
     document.getElementById('bar'+num_bar).style.left = left + 5 + 'px';
     left += 5;
-    if (left < arr[num_bar] + 100){
+    if (left < arr[num_bar] + 150){
       setTimeout(setHeight, 20);
     } else {
       num_bar++;
@@ -18,19 +19,51 @@
       }
     }
   }
+
+  function sort(mas) {
+    var not_sorted_i = 0;
+    var min_i = 0;
+    
+    while (not_sorted_i < mas.length-1) {
+      min_i = not_sorted_i;
+      for (var j=not_sorted_i; j<mas.length; ++j) {
+        if (mas[j] < mas[min_i]) {
+	  min_i = j;
+        }
+      }
+      if (mas[not_sorted_i] > mas[min_i]) {
+        var temp = mas[not_sorted_i];
+        mas[not_sorted_i] = mas[min_i];
+        mas[min_i] = temp;
+      }
+      not_sorted_i++;
+    }
+  }
+
   </script>
 <head>
 <body>
 
   <script>   
     var id = '';
-    var f_top = 500;
+    var f_top = 700;
     var height = 0;
+    
+    for (var i = 0; i < arr.length/2; ++i) {
+      var i1 = Math.floor(Math.random()*arr.length), i2 = Math.floor(Math.random()*arr.length);
+      if (i1 != i2) {
+        var temp = arr[i1];
+	arr[i1] = arr[i2];
+	arr[i2] = temp;
+      }
+    }
+    
+    sort(arr);
     
     for (var i = 0; i < arr.length; ++i) {
       id = 'bar' + i;
       height = (arr[i]/2);
-      document.write('<div id="'+id+'" class = "bar" style="height:'+height+'px; left:'+(height*2)+'px; top:'+(f_top-height)+'px"></div>');
+      document.write('<div id="'+id+'" class = "bar" style="height:'+height+'px; left:'+(100*(i+1))+'px; top:'+(f_top-height)+'px"></div>');
     }
     
     setTimeout(setHeight, 3000);
