@@ -16,18 +16,14 @@
   animation: slide 2s;
 }
 
-#square2{
-  background-color: #cc0000;
+.bar{
+  background-color: #ccbb55;
   height: 100px;
-  width: 100px;    
+  width: 10px;
   
-  border-radius: 15px;
-  border-style: solid;
-  border-width: 10px;
-  border-color: #00bb00;
-  
-  position: relative;
-  left: 120px;
+  position: absolute;
+  left: 100px;
+  top: 400px;
 }
 
 #plot{
