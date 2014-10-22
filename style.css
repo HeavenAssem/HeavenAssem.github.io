@@ -1,0 +1,49 @@
+#square1{
+  background-color: #cc0000;
+  height: 100px;
+  width: 100px;    
+  
+  border-radius: 15px;
+  border-style: solid;
+  border-width: 10px;
+  border-color: #00bb00;
+  
+  position: relative;
+  top: 0px;
+  left: 0px;
+  
+  -webkit-animation: slide 2s;
+  animation: slide 2s;
+}
+
+#square2{
+  background-color: #cc0000;
+  height: 100px;
+  width: 100px;    
+  
+  border-radius: 15px;
+  border-style: solid;
+  border-width: 10px;
+  border-color: #00bb00;
+  
+  position: relative;
+  left: 120px;
+}
+
+#plot{
+  background-color: #00bb00;
+  height: 240px;
+  width: 240px;  
+}
+
+@-webkit-keyframes slide {
+  0%{ top: 0px; left: 0px;}
+  50%{ top: 120px; left: 120px }
+  100%{ top: 0px; left: 0px; }
+}
+
+@keyframes slide {
+  0%{ top: 0px; left: 0px;}
+  50%{ top: 120px; left: 120px }
+  100%{ top: 0px; left: 0px; }
+}
