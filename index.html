@@ -8,7 +8,7 @@
       }
       var leftArrow = function(e) {
         var event = window.event ? window.event : e;
-        var style = document.getElementById("square1").style;
+        var style = document.getElementById("sq1").style;
         var top = parseInt(style.top); 
         top = isNaN(top) ? 0 : top;
         var left = parseInt(style.left);
@@ -22,7 +22,27 @@
           style.left = left < 110 ? (left+120) : left;
         } else if (event.keyCode == '40') {  // down
           style.top = top < 110 ? (top+120) : top;
+        } else if (event.keyCode == '13') {
+          var elems = [document.getElementById('sq1'),
+                       document.getElementById('sq2'),
+                       document.getElementById('sq3'),
+                       document.getElementById('sq4')]
+
+          for (var el in elems) {
+            elems[el].style.webkitAnimationName = 'spin';
+            elems[el].style.webkitAnimationDuration = '2s';
+            elems[el].style.webkitAnimationTimingFunction = 'lenear';
+            elems[el].style.webkitAnimationIterationCount = 'infinite';
+          }
+ 
+          setTimeout(function() {
+                for (var el in elems) {
+                  elems[el].style.webkitAnimationName = '';
+                }
+            }, 16000);
+          //elem.className = 'square2';
         }
+
       }
       document.onkeydown = leftArrow;
     </script>
@@ -33,9 +53,10 @@
       f();
     </script> 
 
-    <div id="plot">
-      <div id="square1"></div>
-    </div>
+    <div id="sq1" class="square2"></div>
+    <div id="sq2" class="square2"></div>
+    <div id="sq3" class="square2"></div>
+    <div id="sq4" class="square2"></div>
     
   </body>
 </html>

@@ -3,8 +3,12 @@
 <head>
   <link href="style.css" type="text/css" rel="stylesheet" />
   <script>
-  
-  var arr = [600, 300, 500, 400, 200, 700, 100, 800, 900, 1000];
+  function Bar(style, id) {
+    this.style = style;
+    this.barId = id;
+  }
+  var barArray = [];
+  var arr = [600, 300, 500, 400, 200, 700, 100, 800, 900];
   var num_bar = 0;
   function setHeight(){
     var left = parseInt(document.getElementById('bar'+num_bar).style.left);
@@ -19,6 +23,28 @@
       }
     }
   }
+  
+  function swap(bar1, bar2, reverse) {
+    var left1 = parseInt(bar1.style.left);
+    var left2 = parseInt(bar2.style.left);
+    if (reverse){
+      document.getElementById('bar'+(arr.length-1)).style.left = (left2 - 5) + 'px';
+      document.getElementById('bar0').style.left = (left1 + 5) + 'px';
+      left2 -= 5;
+      left1 += 5;
+      if (left1 < arr[arr.length-1]) {
+        setTimeout(function() {swap(bar1, bar2, reverse);}, 20);
+      }
+    } else {
+      document.getElementById('bar'+(arr.length-1)).style.left = (left2 + 5) + 'px';
+      document.getElementById('bar0').style.left = (left1 - 5) + 'px';
+      left2 += 5;
+      left1 -= 5;
+      if (left1 > arr[arr.length-1]) {
+        setTimeout(function() {swap(bar1, bar2, reverse);}, 20);
+      }
+    }
+  }
 
   function sort(mas) {
     var not_sorted_i = 0;
@@ -27,14 +53,15 @@
     while (not_sorted_i < mas.length-1) {
       min_i = not_sorted_i;
       for (var j=not_sorted_i; j<mas.length; ++j) {
-        if (mas[j] < mas[min_i]) {
+        if (mas[j].style.left < mas[min_i].style.left) {
 	  min_i = j;
         }
       }
-      if (mas[not_sorted_i] > mas[min_i]) {
+      if (mas[not_sorted_i].style.left > mas[min_i].style.left) {
         var temp = mas[not_sorted_i];
         mas[not_sorted_i] = mas[min_i];
         mas[min_i] = temp;
+        swap(mas[not_sorted_i], mas[min_i], false);
       }
       not_sorted_i++;
     }
@@ -58,15 +85,17 @@
       }
     }
     
-    sort(arr);
+    arr[arr.length] = 1000;
     
     for (var i = 0; i < arr.length; ++i) {
       id = 'bar' + i;
       height = (arr[i]/2);
       document.write('<div id="'+id+'" class = "bar" style="height:'+height+'px; left:'+(100*(i+1))+'px; top:'+(f_top-height)+'px"></div>');
+      barArray[barArray.length] = new Bar(document.getElementById(id).style, id);
     }
-    
-    setTimeout(setHeight, 3000);
+    //setTimeout(function() {sort(barArray);}, 3000);
+    setTimeout(function() { alert('first');}, 4000);
+    alert('second');
     
   </script> 
 
